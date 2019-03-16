@@ -30,7 +30,7 @@ import (
 func main() {
 	h := gollector.Handler{}
 	h.Senders = []gollector.Sender{gollector.InfluxDB{
-		Url:         "http://127.0.0.1:8086/write?db=test",
+		URL:         "http://127.0.0.1:8086/write?db=test",
 		Measurement: "test",
 	}}
 	var receiver gollector.Receiver
