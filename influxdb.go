@@ -30,15 +30,19 @@ import (
 	"time"
 )
 
+// InfluxDB is ..
 type InfluxDB struct {
-	Url         string
+	// URL is the URL to InfluxDB
+	URL string
+	// Measurement is ...
 	Measurement string
 }
 
-func (idb InfluxDB) Send(c *Container) error {
+// Send sends a container to InfluxDB
+func (i InfluxDB) Send(c *Container) error {
 	var buffer bytes.Buffer
 	for _, m := range c.Metrics {
-		fmt.Fprintf(&buffer, "%s", idb.Measurement)
+		fmt.Fprintf(&buffer, "%s", i.Measurement)
 		for key, value := range c.Template.Metadata {
 			fmt.Fprintf(&buffer, ",%s=%#v", key, value)
 		}
@@ -57,7 +61,7 @@ func (idb InfluxDB) Send(c *Container) error {
 		}
 		fmt.Fprintf(&buffer, " %d\n", lt.UnixNano())
 	}
-	req, err := http.NewRequest("POST", idb.Url, &buffer)
+	req, err := http.NewRequest("POST", i.URL, &buffer)
 	req.Header.Set("Content-Type", "text/plain")
 	timeout := time.Duration(5 * time.Second)
 	client := http.Client{

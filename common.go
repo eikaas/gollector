@@ -22,19 +22,23 @@
 
 package gollector
 
+// Handler hanldes ...
 type Handler struct {
 	Transformers []Transformer
 	Senders      []Sender
 }
 
+// Sender is anything that can send a Container
 type Sender interface {
 	Send(c *Container) error
 }
 
+// Transformer is anything that can transform an Container
 type Transformer interface {
 	Transform(c *Container) error
 }
 
+// Receiver is anything that can start
 type Receiver interface {
 	Start() error
 }

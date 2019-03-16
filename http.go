@@ -30,11 +30,14 @@ import (
 	"net/http"
 )
 
+// HTTPReceiver is a ...
 type HTTPReceiver struct {
+	// Handler is exported and should have an explanatory comment
 	Handler *Handler
 }
 
-func (handler HTTPReceiver) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+// ServeHTTP implements the http.Handler interface
+func (h HTTPReceiver) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if r.ContentLength > 0 {
 		b := make([]byte, r.ContentLength)
 		n, err := io.ReadFull(r.Body, b)
@@ -49,18 +52,18 @@ func (handler HTTPReceiver) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			fmt.Fprintf(w, "Unable to parse JSON: %s", err)
 		}
-		for _, t := range handler.Handler.Transformers {
+		for _, t := range h.Handler.Transformers {
 			t.Transform(&m)
 		}
-		for _, s := range handler.Handler.Senders {
+		for _, s := range h.Handler.Senders {
 			s.Send(&m)
 		}
 		fmt.Fprintf(w, "OK\n")
 	}
 }
 
-func (handler HTTPReceiver) Start() error {
-	http.Handle("/", handler)
-	log.Fatal(http.ListenAndServe(":8080", nil))
-	return fmt.Errorf("Shouldn't reach this")
+// Start starts the HTTPReceiver. It returns an error if its unable to
+// bind to its configured address
+func (h HTTPReceiver) Start() error {
+	return http.ListenAndServe(":8080", h)
 }

@@ -29,9 +29,12 @@ import (
 
 // Metric is a metric
 type Metric struct {
-	Time     *time.Time             `json:"timestamp,omitempty"`
+	// Time is the timestamp of the Metric
+	Time *time.Time `json:"timestamp,omitempty"`
+	// Metadata contains Metric metadata
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
-	Data     map[string]interface{} `json:"data,omitempty"`
+	// Data contains the Metric  data
+	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 // Validate returns an error if the metric is invalid

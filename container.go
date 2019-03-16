@@ -1,6 +1,8 @@
 package gollector
 
-// Container is a ...
+import "fmt"
+
+// Container seems like a central concept that warrants an explanation
 type Container struct {
 	Template Metric   `json:"template,omitempty"`
 	Metrics  []Metric `json:"metrics"`
