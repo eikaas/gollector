@@ -41,7 +41,7 @@ func (handler HTTPReceiver) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			log.Panicf("Read error from client %v, read %d bytes: %s", r.RemoteAddr, n, err)
 		}
-		var m GollectorContainer
+		var m Container
 		err = json.Unmarshal(b, &m)
 		if err == nil {
 			err = m.Validate()

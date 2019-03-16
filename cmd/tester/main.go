@@ -40,11 +40,11 @@ var metrics = flag.Int64("metrics", 1000, "Number of metrics per HTTP post")
 var values = flag.Int64("values", 5, "Number of values per metric")
 
 func meh(t time.Time) int64 {
-	c := gollector.GollectorContainer{}
+	c := gollector.Container{}
 	c.Template.Time = &t
-	c.Metrics = make([]gollector.GollectorMetric, *metrics)
+	c.Metrics = make([]gollector.Metric, *metrics)
 	for i := int64(0); i < *metrics; i++ {
-		m := gollector.GollectorMetric{}
+		m := gollector.Metric{}
 		m.Metadata = map[string]interface{}{}
 		m.Metadata["key1"] = i
 		m.Data = map[string]interface{}{}

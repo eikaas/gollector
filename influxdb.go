@@ -35,7 +35,7 @@ type InfluxDB struct {
 	Measurement string
 }
 
-func (idb InfluxDB) Send(c *GollectorContainer) error {
+func (idb InfluxDB) Send(c *Container) error {
 	var buffer bytes.Buffer
 	for _, m := range c.Metrics {
 		fmt.Fprintf(&buffer, "%s", idb.Measurement)
