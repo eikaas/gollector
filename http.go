@@ -1,5 +1,4 @@
-/*
- * gollector, generic receiver
+/* Package gollector is a collector of various data
  *
  * Copyright (c) 2019 Telenor Norge AS
  * Author(s):
@@ -21,12 +20,11 @@
  * 02110-1301  USA
  */
 
-package receivers
+package gollector
 
 import (
 	"encoding/json"
 	"fmt"
-	. "github.com/KristianLyng/gollector/pkg/common"
 	"io"
 	"log"
 	"net/http"

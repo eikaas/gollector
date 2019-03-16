@@ -1,5 +1,4 @@
-/*
- * gollector, influxdb writer
+/* Package gollector is a collector of various data
  *
  * Copyright (c) 2019 Telenor Norge AS
  * Author(s):
@@ -21,12 +20,11 @@
  * 02110-1301  USA
  */
 
-package senders
+package gollector
 
 import (
 	"bytes"
 	"fmt"
-	. "github.com/KristianLyng/gollector/pkg/common"
 	"log"
 	"net/http"
 	"time"

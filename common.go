@@ -1,5 +1,4 @@
-/*
- * gollector, common trivialities
+/* Package gollector is a collector of various data
  *
  * Copyright (c) 2019 Telenor Norge AS
  * Author(s):
@@ -21,7 +20,7 @@
  * 02110-1301  USA
  */
 
-package common
+package gollector
 
 import (
 	"log"
