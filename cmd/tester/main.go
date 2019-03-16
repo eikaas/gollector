@@ -28,22 +28,23 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	. "github.com/KristianLyng/gollector/pkg/common"
 	"log"
 	"math/rand"
 	"net/http"
 	"time"
+
+	"github.com/KristianLyng/gollector"
 )
 
 var metrics = flag.Int64("metrics", 1000, "Number of metrics per HTTP post")
 var values = flag.Int64("values", 5, "Number of values per metric")
 
 func meh(t time.Time) int64 {
-	c := GollectorContainer{}
+	c := gollector.GollectorContainer{}
 	c.Template.Time = &t
-	c.Metrics = make([]GollectorMetric, *metrics)
+	c.Metrics = make([]gollector.GollectorMetric, *metrics)
 	for i := int64(0); i < *metrics; i++ {
-		m := GollectorMetric{}
+		m := gollector.GollectorMetric{}
 		m.Metadata = map[string]interface{}{}
 		m.Metadata["key1"] = i
 		m.Data = map[string]interface{}{}

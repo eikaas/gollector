@@ -24,15 +24,18 @@
 package main
 
 import (
-	. "github.com/KristianLyng/gollector/pkg/common"
-	. "github.com/KristianLyng/gollector/pkg/receivers"
-	. "github.com/KristianLyng/gollector/pkg/senders"
+	"github.com/KristianLyng/gollector"
 )
 
 func main() {
-	h := Handler{}
-	h.Senders = []Sender{InfluxDB{"http://127.0.0.1:8086/write?db=test", "test"}}
-	var receiver Receiver
-	receiver = HTTPReceiver{&h}
+	h := gollector.Handler{}
+	h.Senders = []gollector.Sender{gollector.InfluxDB{
+		Url:         "http://127.0.0.1:8086/write?db=test",
+		Measurement: "test",
+	}}
+	var receiver gollector.Receiver
+	receiver = gollector.HTTPReceiver{
+		Handler: &h,
+	}
 	receiver.Start()
 }
