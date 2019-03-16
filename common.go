@@ -22,10 +22,6 @@
 
 package gollector
 
-import (
-	"log"
-)
-
 type Handler struct {
 	Transformers []Transformer
 	Senders      []Sender
@@ -41,13 +37,4 @@ type Transformer interface {
 
 type Receiver interface {
 	Start() error
-}
-
-type Gerror struct {
-	Reason string
-}
-
-func (e Gerror) Error() string {
-	log.Printf("Error: %v", e.Reason)
-	return e.Reason
 }

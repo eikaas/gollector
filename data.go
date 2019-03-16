@@ -23,6 +23,7 @@
 package gollector
 
 import (
+	"fmt"
 	"time"
 )
 
@@ -39,21 +40,21 @@ type Metric struct {
 
 func (m Metric) Validate() error {
 	if m.Data == nil {
-		return Gerror{"Missing data for metric"}
+		return fmt.Errorf("Missing data for metric")
 	}
 	return nil
 }
 
 func (c Container) Validate() error {
 	if c.Metrics == nil {
-		return Gerror{"Missing metrics[] data"}
+		return fmt.Errorf("Missing metrics[] data")
 	}
 	if len(c.Metrics) <= 0 {
-		return Gerror{"Empty metrics[] data"}
+		return fmt.Errorf("Empty metrics[] data")
 	}
 	for i := 0; i < len(c.Metrics); i++ {
 		if c.Metrics[i].Time == nil && c.Template.Time == nil {
-			return Gerror{"Missing timestamp in both metric and container"}
+			return fmt.Errorf("Missing timestamp in both metric and container")
 		}
 		err := c.Metrics[i].Validate()
 		if err != nil {

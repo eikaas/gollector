@@ -62,5 +62,5 @@ func (handler HTTPReceiver) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 func (handler HTTPReceiver) Start() error {
 	http.Handle("/", handler)
 	log.Fatal(http.ListenAndServe(":8080", nil))
-	return Gerror{"Shouldn't reach this"}
+	return fmt.Errorf("Shouldn't reach this")
 }
